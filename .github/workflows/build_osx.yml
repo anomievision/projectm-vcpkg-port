@@ -1,0 +1,25 @@
+name: macOS (x86_64)
+
+on:
+  push:
+      branches: 
+        - "*"
+      tags:
+        - "*"
+    
+  pull_request:
+      branches: 
+        - "*"
+
+jobs:
+  build:
+    name: Build
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install with VCPKG
+        run: |
+          vcpkg install libprojectm --overlay-ports="${{ github.workspace }}/port"
