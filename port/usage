@@ -1,8 +1,4 @@
-#
-# To utilize the ProjectM library, add the following to your CMakeLists.txt:
+To use libprojectm in CMakeLists.txt:
 
-find_package(projectM4 REQUIRED)
-target_link_libraries(main PRIVATE libprojectM::projectM)
-
-#
-#
+    find_package(projectM4 REQUIRED)
+    target_link_libraries(main PRIVATE libprojectM::projectM)
