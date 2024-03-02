@@ -19,7 +19,6 @@ else()
 endif()
 
 # Set variables for the port
-set(PORT_NAME "libprojectM")
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/${GIT_REF}.clean)
 
 # Create the source directory, if it does not exist
@@ -60,23 +59,32 @@ endif()
 # Configure CMake for the project
 vcpkg_cmake_configure(
     SOURCE_PATH "${SOURCE_PATH}"
-)
+  )
 
 # Install the project using CMake
 vcpkg_cmake_install(
     ADD_BIN_TO_PATH
-)
+  )
 
 # Create directories
-file(MAKE_DIRECTORY "${CURRENT_PACKAGES_DIR}/share/${PORT_NAME}")
-file(MAKE_DIRECTORY "${CURRENT_PACKAGES_DIR}/debug/share/${PORT_NAME}")
+file(MAKE_DIRECTORY "${CURRENT_PACKAGES_DIR}/share/${PORT}")
+file(MAKE_DIRECTORY "${CURRENT_PACKAGES_DIR}/debug/share/${PORT}")
 
-# Perform any necessary fixups for the installed package
-vcpkg_cmake_config_fixup(PACKAGE_NAME "${PORT_NAME}")
+# Perform any necessary fixups for the installed package projectM4
+vcpkg_cmake_config_fixup(
+    PACKAGE_NAME "${PORT}"
+    CONFIG_PATH "lib/cmake/projectM4"
+    DO_NOT_DELETE_PARENT_CONFIG_PATH
+  )
+
+vcpkg_cmake_config_fixup(
+    PACKAGE_NAME "${PORT}"
+    CONFIG_PATH "lib/cmake/projectM4Playlist"
+  )
 
 # Remove unnecessary files in the debug include directory
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
 
 # Install LICENSE and configure_file (usage file)
-file(INSTALL "${SOURCE_PATH}/LICENSE.txt" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT_NAME}" RENAME copyright)
-configure_file("${CMAKE_CURRENT_LIST_DIR}/usage" "${CURRENT_PACKAGES_DIR}/share/${PORT_NAME}/usage" COPYONLY)
+file(INSTALL "${SOURCE_PATH}/LICENSE.txt" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
+configure_file("${CMAKE_CURRENT_LIST_DIR}/usage" "${CURRENT_PACKAGES_DIR}/share/${PORT}/usage" COPYONLY)

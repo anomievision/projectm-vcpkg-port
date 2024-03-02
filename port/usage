@@ -1,4 +1,4 @@
 To use libprojectm in CMakeLists.txt:
 
-    find_package(projectM4 REQUIRED)
+    find_package(projectM4 REQUIRED COMPONENTS Playlist)
     target_link_libraries(main PRIVATE libprojectM::projectM)

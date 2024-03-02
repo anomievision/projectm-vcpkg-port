@@ -1,3 +1,3 @@
 vcpkg remove libprojectm
 
-vcpkg install libprojectm --overlay-ports="E:\Github\anomievision\projectm-vcpkg-port\port"
+vcpkg install libprojectm --triplet x64-windows --overlay-ports="E:\GitHub\anomievision\projectm-vcpkg-port\port"
